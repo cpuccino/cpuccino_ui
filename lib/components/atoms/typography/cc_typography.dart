@@ -8,6 +8,7 @@ class CCTypography extends StatelessWidget {
   final Color color;
 
   final bool showDivider;
+  final double? dividerWidth;
 
   final List<CCTypographyModifier> modifiers;
 
@@ -16,17 +17,18 @@ class CCTypography extends StatelessWidget {
     this.text = '',
     this.color = const Color(0xFF575757),
     this.showDivider = false,
+    this.dividerWidth,
     this.modifiers = const [],
   });
 
   double _getFontSize() {
-    if (modifiers.contains(CCTypographyModifier.t1)) return CCTypographyConfiguration.T1_FONT_SIZE;
-    if (modifiers.contains(CCTypographyModifier.t2)) return CCTypographyConfiguration.T2_FONT_SIZE;
-    if (modifiers.contains(CCTypographyModifier.t3)) return CCTypographyConfiguration.T3_FONT_SIZE;
-    if (modifiers.contains(CCTypographyModifier.t5)) return CCTypographyConfiguration.T5_FONT_SIZE;
-    if (modifiers.contains(CCTypographyModifier.t6)) return CCTypographyConfiguration.T6_FONT_SIZE;
+    if (modifiers.contains(CCTypographyModifier.t1)) return CCTypographyConfiguration.FONT_SIZE_T1;
+    if (modifiers.contains(CCTypographyModifier.t2)) return CCTypographyConfiguration.FONT_SIZE_T2;
+    if (modifiers.contains(CCTypographyModifier.t3)) return CCTypographyConfiguration.FONT_SIZE_T3;
+    if (modifiers.contains(CCTypographyModifier.t5)) return CCTypographyConfiguration.FONT_SIZE_T5;
+    if (modifiers.contains(CCTypographyModifier.t6)) return CCTypographyConfiguration.FONT_SIZE_T6;
 
-    return CCTypographyConfiguration.T4_FONT_SIZE;
+    return CCTypographyConfiguration.FONT_SIZE_T4;
   }
 
   Widget _buildText(double fontSize) {
@@ -45,15 +47,11 @@ class CCTypography extends StatelessWidget {
 
   Widget _buildDivider(double fontSize) {
     return Container(
-      margin: EdgeInsets.only(top: 3, bottom: 3),
-      alignment: Alignment.center,
-      child: Container(
-        width: double.infinity,
-        height: fontSize / 5,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(5),
-        ),
+      width: dividerWidth,
+      height: fontSize / 5,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(5),
       ),
     );
   }
@@ -64,12 +62,13 @@ class CCTypography extends StatelessWidget {
 
     return Container(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               icon ?? Container(),
-              icon != null ? SizedBox(width: 10) : Container(),
+              icon != null ? SizedBox(width: 5) : Container(),
               _buildText(fontSize),
             ],
           ),
