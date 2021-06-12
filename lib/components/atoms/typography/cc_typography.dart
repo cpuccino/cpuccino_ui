@@ -1,10 +1,8 @@
-import 'package:cpuccino_ui/components/atoms/typography/cc_typography_type.dart';
-import 'package:cpuccino_ui/configurations/cc_typography_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:cpuccino_ui/configurations/cc_typography_configuration.dart';
+import 'package:cpuccino_ui/components/atoms/typography/cc_typography_modifier.dart';
 
 class CCTypography extends StatelessWidget {
-  final CCTypographyType _type;
-
   final String _text;
   final Widget? _icon;
 
@@ -13,35 +11,39 @@ class CCTypography extends StatelessWidget {
   final Alignment _dividerAlignment;
 
   final Color _color;
+  final List<CCTypographyModifier> _modifiers;
 
   CCTypography({
-    CCTypographyType type = CCTypographyType.t4,
     required String text,
     Widget? icon,
     bool showDivider = false,
     double? dividerWidth,
     Alignment dividerAlignment = Alignment.center,
+    List<CCTypographyModifier> modifiers = const [
+      CCTypographyModifier.t4,
+    ],
     Color color = const Color(0xFF575757),
-  })  : _type = type,
-        _text = text,
+  })  : _text = text,
         _icon = icon,
         _showDivider = showDivider,
         _dividerWidth = dividerWidth = 50.0,
         _dividerAlignment = dividerAlignment,
+        _modifiers = modifiers,
         _color = color;
 
   double _getFontSize() {
-    if (_type == CCTypographyType.t1) return CCTypographyConfiguration.T1_FONT_SIZE;
-    if (_type == CCTypographyType.t2) return CCTypographyConfiguration.T2_FONT_SIZE;
-    if (_type == CCTypographyType.t3) return CCTypographyConfiguration.T3_FONT_SIZE;
-    if (_type == CCTypographyType.t5) return CCTypographyConfiguration.T5_FONT_SIZE;
-    if (_type == CCTypographyType.t6) return CCTypographyConfiguration.T6_FONT_SIZE;
+    if (_modifiers.contains(CCTypographyModifier.t1)) return CCTypographyConfiguration.T1_FONT_SIZE;
+    if (_modifiers.contains(CCTypographyModifier.t2)) return CCTypographyConfiguration.T2_FONT_SIZE;
+    if (_modifiers.contains(CCTypographyModifier.t3)) return CCTypographyConfiguration.T3_FONT_SIZE;
+    if (_modifiers.contains(CCTypographyModifier.t5)) return CCTypographyConfiguration.T5_FONT_SIZE;
+    if (_modifiers.contains(CCTypographyModifier.t6)) return CCTypographyConfiguration.T6_FONT_SIZE;
 
     return CCTypographyConfiguration.T4_FONT_SIZE;
   }
 
   Widget _buildText() {
     var fontSize = _getFontSize();
+
     return Expanded(
       child: Text(
         _text,
