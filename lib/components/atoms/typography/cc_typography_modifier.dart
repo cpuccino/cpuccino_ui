@@ -1,5 +1,7 @@
+import 'package:cpuccino_ui/components/atoms/typography/cc_typography.dart';
+
 /**
- * [CCTypographyModifier] text configuration
+ * [CCTypographyModifier] contains style overloads for [CCTypography]
  */
 enum CCTypographyModifier {
   /** [CCTypographyModifier.t1] text config fontSize = [CCTypographyConfiguration.T1_FONT_SIZE] */

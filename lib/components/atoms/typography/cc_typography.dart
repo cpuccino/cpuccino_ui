@@ -3,52 +3,38 @@ import 'package:cpuccino_ui/configurations/cc_typography_configuration.dart';
 import 'package:cpuccino_ui/components/atoms/typography/cc_typography_modifier.dart';
 
 class CCTypography extends StatelessWidget {
-  final String _text;
-  final Widget? _icon;
+  final Widget? icon;
+  final String text;
+  final Color color;
 
-  final bool _showDivider;
-  final double _dividerWidth;
-  final Alignment _dividerAlignment;
+  final bool showDivider;
 
-  final Color _color;
-  final List<CCTypographyModifier> _modifiers;
+  final List<CCTypographyModifier> modifiers;
 
   CCTypography({
-    required String text,
-    Widget? icon,
-    bool showDivider = false,
-    double? dividerWidth,
-    Alignment dividerAlignment = Alignment.center,
-    List<CCTypographyModifier> modifiers = const [
-      CCTypographyModifier.t4,
-    ],
-    Color color = const Color(0xFF575757),
-  })  : _text = text,
-        _icon = icon,
-        _showDivider = showDivider,
-        _dividerWidth = dividerWidth = 50.0,
-        _dividerAlignment = dividerAlignment,
-        _modifiers = modifiers,
-        _color = color;
+    this.icon,
+    this.text = '',
+    this.color = const Color(0xFF575757),
+    this.showDivider = false,
+    this.modifiers = const [],
+  });
 
   double _getFontSize() {
-    if (_modifiers.contains(CCTypographyModifier.t1)) return CCTypographyConfiguration.T1_FONT_SIZE;
-    if (_modifiers.contains(CCTypographyModifier.t2)) return CCTypographyConfiguration.T2_FONT_SIZE;
-    if (_modifiers.contains(CCTypographyModifier.t3)) return CCTypographyConfiguration.T3_FONT_SIZE;
-    if (_modifiers.contains(CCTypographyModifier.t5)) return CCTypographyConfiguration.T5_FONT_SIZE;
-    if (_modifiers.contains(CCTypographyModifier.t6)) return CCTypographyConfiguration.T6_FONT_SIZE;
+    if (modifiers.contains(CCTypographyModifier.t1)) return CCTypographyConfiguration.T1_FONT_SIZE;
+    if (modifiers.contains(CCTypographyModifier.t2)) return CCTypographyConfiguration.T2_FONT_SIZE;
+    if (modifiers.contains(CCTypographyModifier.t3)) return CCTypographyConfiguration.T3_FONT_SIZE;
+    if (modifiers.contains(CCTypographyModifier.t5)) return CCTypographyConfiguration.T5_FONT_SIZE;
+    if (modifiers.contains(CCTypographyModifier.t6)) return CCTypographyConfiguration.T6_FONT_SIZE;
 
     return CCTypographyConfiguration.T4_FONT_SIZE;
   }
 
-  Widget _buildText() {
-    var fontSize = _getFontSize();
-
+  Widget _buildText(double fontSize) {
     return Expanded(
       child: Text(
-        _text,
+        text,
         style: TextStyle(
-          color: _color,
+          color: color,
           fontSize: fontSize,
           letterSpacing: 0.3,
           fontWeight: FontWeight.w500,
@@ -57,39 +43,37 @@ class CCTypography extends StatelessWidget {
     );
   }
 
-  Widget _buildDivider() {
-    var fontSize = _getFontSize();
-
-    return _showDivider
-        ? Container(
-            margin: EdgeInsets.only(top: 3, bottom: 3),
-            alignment: _dividerAlignment,
-            child: Container(
-              width: _dividerWidth,
-              height: fontSize / 5,
-              decoration: BoxDecoration(
-                color: _color,
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
-          )
-        : Container();
+  Widget _buildDivider(double fontSize) {
+    return Container(
+      margin: EdgeInsets.only(top: 3, bottom: 3),
+      alignment: Alignment.center,
+      child: Container(
+        width: double.infinity,
+        height: fontSize / 5,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(5),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    var fontSize = _getFontSize();
+
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              _icon ?? Container(),
-              _icon != null ? SizedBox(width: 10) : Container(),
-              _buildText(),
+              icon ?? Container(),
+              icon != null ? SizedBox(width: 10) : Container(),
+              _buildText(fontSize),
             ],
           ),
-          _buildDivider(),
+          showDivider ? _buildDivider(fontSize) : Container(),
         ],
       ),
     );
