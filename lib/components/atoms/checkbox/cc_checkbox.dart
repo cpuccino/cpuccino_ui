@@ -48,10 +48,15 @@ class CCCheckbox extends StatelessWidget {
   }
 
   double _getBorderRadius() {
-    if (modifiers.contains(CCCheckboxModifier.shapeSquare)) return 0;
-    if (modifiers.contains(CCCheckboxModifier.shapeCircular)) return 100;
+    if (modifiers.contains(CCCheckboxModifier.shapeSquare)) {
+      return CCCheckboxConfiguration.BORDER_RADIUS_SQUARE;
+    }
 
-    return 5;
+    if (modifiers.contains(CCCheckboxModifier.shapeCircular)) {
+      return CCCheckboxConfiguration.BORDER_RADIUS_CIRCULAR;
+    }
+
+    return CCCheckboxConfiguration.BORDER_RADIUS_ROUNDED;
   }
 
   BoxDecoration _getDecoration() {

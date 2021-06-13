@@ -1,3 +1,4 @@
+import 'package:cpuccino_ui/configurations/cc_input_configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:cpuccino_ui/components/atoms/input/cc_input_modifier.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -47,15 +48,35 @@ class CCInput extends HookWidget {
 
   double _getBorderRadius() {
     var rounded = modifiers.contains(CCInputModifier.shapeRounded);
-    return rounded ? 6 : 0;
+    return rounded
+        ? CCInputConfiguration.BORDER_RADIUS_ROUNDED
+        : CCInputConfiguration.BORDER_RADIUS_SQUARE;
+  }
+
+  double _getFontSize() {
+    if (modifiers.contains(CCInputModifier.sizeSmall)) return CCInputConfiguration.SIZE_SMALL;
+    if (modifiers.contains(CCInputModifier.sizeLarge)) return CCInputConfiguration.SIZE_LARGE;
+
+    return CCInputConfiguration.SIZE_MEDIUM;
+  }
+
+  EdgeInsets _getPadding() {
+    if (modifiers.contains(CCInputModifier.sizeSmall)) {
+      return EdgeInsets.only(top: 6, right: 30, bottom: 6, left: 13);
+    }
+
+    if (modifiers.contains(CCInputModifier.sizeLarge)) {
+      return EdgeInsets.only(top: 11, right: 30, bottom: 11, left: 13);
+    }
+
+    return EdgeInsets.only(top: 8, right: 30, bottom: 8, left: 13);
   }
 
   InputDecoration _getTextFieldDecoration() {
     var bgColor = _getBgColor();
     var borderRadius = _getBorderRadius();
     var borderColor = _getBorderColor();
-
-    var contentPadding = EdgeInsets.only(top: 8, right: 25, bottom: 8, left: 10);
+    var contentPadding = _getPadding();
 
     return InputDecoration(
       isDense: true,
@@ -82,9 +103,10 @@ class CCInput extends HookWidget {
         controller: controller,
         keyboardType: inputType,
         onChanged: (value) => inputValueNotifier.value = value,
-        style: TextStyle(color: color, fontSize: 12),
+        style: TextStyle(color: color, fontSize: _getFontSize()),
         decoration: _getTextFieldDecoration(),
         cursorColor: cursorColor,
+        cursorWidth: 1.2,
       ),
     );
   }
@@ -114,7 +136,7 @@ class CCInput extends HookWidget {
           Row(children: [_buildTextField(inputValueNotifier)]),
           if (inputValueNotifier.value.isNotEmpty)
             Positioned(
-              right: 8,
+              right: 10,
               child: _buildClear(inputValueNotifier),
             )
         ],
