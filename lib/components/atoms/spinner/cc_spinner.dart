@@ -1,9 +1,9 @@
 import 'package:cpuccino_ui/components/atoms/spinner/cc_spinner_modifier.dart';
-import 'package:cpuccino_ui/configurations/cc_input_configuration.dart';
 import 'package:cpuccino_ui/configurations/cc_spinner_configuration.dart';
 import 'package:flutter/material.dart';
 
 class CCSpinner extends StatelessWidget {
+  final double? size;
   final double strokeWidth;
 
   final Color spinnerColor;
@@ -12,6 +12,7 @@ class CCSpinner extends StatelessWidget {
   final List<CCSpinnerModifier> modifiers;
 
   CCSpinner({
+    this.size,
     this.strokeWidth = 1.5,
     this.spinnerColor = const Color(0xFFF8F8FB),
     this.spinnerBg = const Color(0xFFA6A6A6),
@@ -27,11 +28,11 @@ class CCSpinner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = _getSize();
+    var spinnerSize = size ?? _getSize();
 
     return SizedBox(
-      width: size,
-      height: size,
+      width: spinnerSize,
+      height: spinnerSize,
       child: Stack(
         children: [
           CircularProgressIndicator(
