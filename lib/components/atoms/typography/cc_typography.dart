@@ -68,11 +68,11 @@ class CCTypography extends StatelessWidget {
           Row(
             children: [
               icon ?? Container(),
-              icon != null ? SizedBox(width: 5) : Container(),
+              if (icon != null) SizedBox(width: 5),
               _buildText(fontSize),
             ],
           ),
-          showDivider ? _buildDivider(fontSize) : Container(),
+          if (showDivider) _buildDivider(fontSize),
         ],
       ),
     );

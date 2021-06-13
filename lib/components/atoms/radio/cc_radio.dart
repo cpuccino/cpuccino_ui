@@ -82,7 +82,7 @@ class CCRadio extends StatelessWidget {
         width: 16,
         height: 16,
         decoration: _getDecoration(),
-        child: filled ? _buildFill() : Container(),
+        child: filled ? _buildFill() : null,
       ),
     );
   }
