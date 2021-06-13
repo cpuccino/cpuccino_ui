@@ -91,9 +91,8 @@ class CCCheckbox extends StatelessWidget {
     var enabled = !modifiers.contains(CCCheckboxModifier.disabled);
     var size = _getSize();
 
-    return InkWell(
-      canRequestFocus: enabled,
-      onTap: onTap,
+    return GestureDetector(
+      onTap: enabled ? onTap : null,
       child: Container(
         width: size,
         height: size,

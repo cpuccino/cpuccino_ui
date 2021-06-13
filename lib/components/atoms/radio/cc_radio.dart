@@ -74,12 +74,16 @@ class CCRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var filled = modifiers.contains(CCRadioModifier.filled);
+    var enabled = !modifiers.contains(CCRadioModifier.disabled);
 
-    return Container(
-      width: 16,
-      height: 16,
-      decoration: _getDecoration(),
-      child: filled ? _buildFill() : Container(),
+    return GestureDetector(
+      onTap: enabled ? onTap : null,
+      child: Container(
+        width: 16,
+        height: 16,
+        decoration: _getDecoration(),
+        child: filled ? _buildFill() : Container(),
+      ),
     );
   }
 }
