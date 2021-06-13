@@ -7,23 +7,23 @@ enum CCCheckboxModifier {
   /** [CCCheckboxModifier.shapeRounded] applies rounded corners to the checkbox */
   shapeRounded,
 
-  /** [CCCheckboxModifier.shapeCircular] applies square corners to the checkbox */
+  /** [CCCheckboxModifier.shapeCircular] applies circular shape to the checkbox */
   shapeCircular,
 
-  /** [CCCheckboxModifier.shapeSquare] applies rounded corners to the checkbox */
+  /** [CCCheckboxModifier.shapeSquare] applies square corners to the checkbox */
   shapeSquare,
 
-  /** [CCCheckboxModifier.sizeSmall] small checkbox */
+  /** [CCCheckboxModifier.sizeSmall] small sized checkbox */
   sizeSmall,
 
-  /** [CCCheckboxModifier.sizeMedium] medium checkbox */
+  /** [CCCheckboxModifier.sizeMedium] medium sized checkbox */
   sizeMedium,
 
-  /** [CCCheckboxModifier.sizeLarge] large checkbox */
+  /** [CCCheckboxModifier.sizeLarge] large sized checkbox */
   sizeLarge,
 
-  /** [CCCheckboxModifier.neutral] unchecked checkbox state */
-  neutral,
+  /** [CCCheckboxModifier.empty] empty checkbox state */
+  empty,
 
   /** [CCCheckboxModifier.include] checked checkbox state */
   include,
@@ -31,6 +31,6 @@ enum CCCheckboxModifier {
   /** [CCCheckboxModifier.exclude] excluded checkbox state */
   exclude,
 
-  /** [CCCheckboxModifier.disabled] disables the checkbox widget */
+  /** [CCCheckboxModifier.disabled] disabled checkbox state */
   disabled,
 }

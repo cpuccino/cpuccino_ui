@@ -7,8 +7,8 @@ class CCCheckbox extends StatelessWidget {
   final Color includeBorderColor;
   final Color excludeBgColor;
   final Color excludeBorderColor;
-  final Color neutralBgColor;
-  final Color neutralBorderColor;
+  final Color emptyBgColor;
+  final Color emptyBorderColor;
 
   final VoidCallback? onTap;
 
@@ -19,8 +19,8 @@ class CCCheckbox extends StatelessWidget {
     this.includeBorderColor = const Color(0xFF3498FF),
     this.excludeBgColor = const Color(0xFFFC4242),
     this.excludeBorderColor = const Color(0xFFFC4242),
-    this.neutralBgColor = const Color(0xFFFFFFFF),
-    this.neutralBorderColor = const Color(0xFFD9D9D9),
+    this.emptyBgColor = const Color(0xFFFFFFFF),
+    this.emptyBorderColor = const Color(0xFFD9D9D9),
     this.onTap,
     this.modifiers = const [],
   });
@@ -33,7 +33,7 @@ class CCCheckbox extends StatelessWidget {
     if (include) return includeBgColor.withOpacity(disabled ? 0.6 : 1);
     if (exclude) return excludeBgColor.withOpacity(disabled ? 0.6 : 1);
 
-    return disabled ? Color(0xFFEDEDF5) : neutralBgColor;
+    return disabled ? Color(0xFFEDEDF5) : emptyBgColor;
   }
 
   Color _getBorderColor() {
@@ -44,7 +44,7 @@ class CCCheckbox extends StatelessWidget {
     if (include) return includeBorderColor.withOpacity(disabled ? 0 : 1);
     if (exclude) return excludeBorderColor.withOpacity(disabled ? 0 : 1);
 
-    return disabled ? Color(0xFFEDEDF5) : neutralBorderColor;
+    return disabled ? Color(0xFFEDEDF5) : emptyBorderColor;
   }
 
   double _getBorderRadius() {
