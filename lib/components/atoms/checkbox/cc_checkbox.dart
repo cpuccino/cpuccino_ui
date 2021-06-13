@@ -17,8 +17,8 @@ class CCCheckbox extends StatelessWidget {
   CCCheckbox({
     this.includeBgColor = const Color(0xFF3498FF),
     this.includeBorderColor = const Color(0xFF3498FF),
-    this.excludeBgColor = const Color(0xFFFC4242),
-    this.excludeBorderColor = const Color(0xFFFC4242),
+    this.excludeBgColor = const Color(0xFF3498FF),
+    this.excludeBorderColor = const Color(0xFF3498FF),
     this.emptyBgColor = const Color(0xFFFFFFFF),
     this.emptyBorderColor = const Color(0xFFD9D9D9),
     this.onTap,
