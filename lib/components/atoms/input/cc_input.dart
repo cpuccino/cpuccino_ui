@@ -50,52 +50,55 @@ class CCInput extends HookWidget {
     return rounded ? 6 : 0;
   }
 
+  InputDecoration _getTextFieldDecoration() {
+    var bgColor = _getBgColor();
+    var borderRadius = _getBorderRadius();
+    var borderColor = _getBorderColor();
+
+    var contentPadding = EdgeInsets.only(top: 8, right: 25, bottom: 8, left: 10);
+
+    return InputDecoration(
+      isDense: true,
+      hintText: hintText,
+      filled: true,
+      fillColor: bgColor,
+      focusColor: bgColor,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+        borderSide: BorderSide(color: borderColor),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+        borderSide: BorderSide(color: focusBorderColor),
+      ),
+      contentPadding: contentPadding,
+      hintStyle: TextStyle(color: color.withOpacity(0.4)),
+    );
+  }
+
   Widget _buildTextField(ValueNotifier<String> inputValueNotifier) {
     return Expanded(
       child: TextField(
         controller: controller,
         keyboardType: inputType,
-        // onChanged: (value) => inputListener.value = value,
-        // onChanged: (value) => controller?.value = value,
-        onChanged: (value) {
-          // print('value: $value');
-          inputValueNotifier.value = value;
-        },
+        onChanged: (value) => inputValueNotifier.value = value,
         style: TextStyle(color: color, fontSize: 12),
-        decoration: InputDecoration(
-          isDense: true,
-          contentPadding: EdgeInsets.only(top: 8, right: 25, bottom: 8, left: 10),
-          hintText: hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(_getBorderRadius()),
-            borderSide: BorderSide(color: _getBorderColor()),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(_getBorderRadius()),
-            borderSide: BorderSide(color: focusBorderColor),
-          ),
-          hintStyle: TextStyle(
-            color: color.withOpacity(0.4),
-          ),
-        ),
+        decoration: _getTextFieldDecoration(),
         cursorColor: cursorColor,
       ),
     );
   }
 
   Widget _buildClear(ValueNotifier<String> inputValueNotifier) {
-    return Positioned(
-      right: 8,
-      child: GestureDetector(
-        onTap: () {
-          controller?.clear();
-          inputValueNotifier.value = controller?.text ?? '';
-        },
-        child: Icon(
-          Icons.close,
-          size: 15,
-          color: clearColor,
-        ),
+    return GestureDetector(
+      onTap: () {
+        controller?.text = '';
+        inputValueNotifier.value = '';
+      },
+      child: Icon(
+        Icons.close,
+        size: 15,
+        color: clearColor,
       ),
     );
   }
@@ -105,15 +108,15 @@ class CCInput extends HookWidget {
     var inputValueNotifier = useState(controller?.text ?? '');
 
     return Container(
-      decoration: BoxDecoration(
-        color: _getBgColor(),
-        borderRadius: BorderRadius.circular(_getBorderRadius()),
-      ),
       child: Stack(
         alignment: Alignment.center,
         children: [
           Row(children: [_buildTextField(inputValueNotifier)]),
-          if (inputValueNotifier.value.isNotEmpty) _buildClear(inputValueNotifier),
+          if (inputValueNotifier.value.isNotEmpty)
+            Positioned(
+              right: 8,
+              child: _buildClear(inputValueNotifier),
+            )
         ],
       ),
     );

@@ -6,6 +6,12 @@
 
 Cpuccino UI Kit built for flutter
 
+
+## Todo
+- [ ] Use map instead of array for modifiers
+- [ ] Remove neutral from modifiers - set as default 
+
+
 ```
 lib
   │
