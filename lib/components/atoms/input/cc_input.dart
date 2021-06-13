@@ -88,6 +88,10 @@ class CCInput extends HookWidget {
         borderRadius: BorderRadius.circular(borderRadius),
         borderSide: BorderSide(color: borderColor),
       ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+        borderSide: BorderSide(color: borderColor),
+      ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
         borderSide: BorderSide(color: focusBorderColor),
@@ -98,12 +102,18 @@ class CCInput extends HookWidget {
   }
 
   Widget _buildTextField(ValueNotifier<String> inputValueNotifier) {
+    var disabled = modifiers.contains(CCInputModifier.disabled);
+
     return Expanded(
       child: TextField(
+        enabled: !disabled,
         controller: controller,
         keyboardType: inputType,
         onChanged: (value) => inputValueNotifier.value = value,
-        style: TextStyle(color: color, fontSize: _getFontSize()),
+        style: TextStyle(
+          color: color.withOpacity(disabled ? 0.5 : 1),
+          fontSize: _getFontSize(),
+        ),
         decoration: _getTextFieldDecoration(),
         cursorColor: cursorColor,
         cursorWidth: 1.2,
