@@ -63,7 +63,7 @@ class CCInput extends HookWidget {
       filled: true,
       fillColor: bgColor,
       focusColor: bgColor,
-      border: OutlineInputBorder(
+      enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
         borderSide: BorderSide(color: borderColor),
       ),
