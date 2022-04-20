@@ -33,18 +33,20 @@ class CCSpinner extends StatelessWidget {
     return SizedBox(
       width: spinnerSize,
       height: spinnerSize,
-      child: Stack(
-        children: [
-          CircularProgressIndicator(
-            strokeWidth: strokeWidth,
-            color: spinnerBg,
-            value: 1,
-          ),
-          CircularProgressIndicator(
-            strokeWidth: strokeWidth,
-            color: spinnerColor,
-          ),
-        ],
+      child: Center(
+        child: Stack(
+          children: [
+            CircularProgressIndicator(
+              strokeWidth: strokeWidth,
+              color: spinnerBg,
+              value: 1,
+            ),
+            CircularProgressIndicator(
+              strokeWidth: strokeWidth,
+              color: spinnerColor,
+            ),
+          ],
+        ),
       ),
     );
   }

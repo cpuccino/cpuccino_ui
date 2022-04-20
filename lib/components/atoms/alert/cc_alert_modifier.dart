@@ -1,0 +1,4 @@
+enum CCAlertModifier {
+  shapeRounded,
+  shapeSquare,
+}
